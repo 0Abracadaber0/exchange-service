@@ -9,11 +9,11 @@ import (
 type Config struct {
 	AppHost StringValue       `env:"APP_HOST" env-default:"0.0.0.0"`
 	AppPort StringValue       `env:"APP_PORT" env-default:"8080"`
-	DbPort  StringValue       `env:"POSTGRES_PORT" env-default:"5432"`
-	DbHost  StringValue       `env:"POSTGRES_HOST" env-default:"postgres"`
-	DbName  StringValue       `env:"POSTGRES_DB" env-default:"library"`
-	DbUser  StringValue       `env:"POSTGRES_USER" env-default:"user"`
-	DbPass  SecretStringValue `env:"POSTGRES_PASSWORD"`
+	DbPort  StringValue       `env:"DB_PORT" env-default:"5432"`
+	DbHost  StringValue       `env:"DB_HOST" env-default:"mysql"`
+	DbName  StringValue       `env:"DB_NAME" env-default:"exchange"`
+	DbUser  StringValue       `env:"DB_USER" env-default:"root"`
+	DbPass  SecretStringValue `env:"DB_PASS"`
 }
 
 type StringValue struct {

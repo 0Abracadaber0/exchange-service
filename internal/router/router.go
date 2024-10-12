@@ -1,7 +1,6 @@
 package router
 
 import (
-	"exchange/internal/config"
 	"log/slog"
 	"time"
 
@@ -16,7 +15,7 @@ func GetRatesInDayHandler(ctx *fiber.Ctx) error {
 	return nil
 }
 
-func SetupRoutes(app *fiber.App, cfg *config.Config, log *slog.Logger) {
+func SetupRoutes(app *fiber.App, log *slog.Logger) {
 
 	app.Use(func(ctx *fiber.Ctx) error {
 		start := time.Now()

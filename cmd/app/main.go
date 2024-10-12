@@ -2,6 +2,7 @@ package main
 
 import (
 	"exchange/internal/config"
+	"exchange/internal/database"
 	"exchange/internal/router"
 	"log/slog"
 	"os"
@@ -21,9 +22,12 @@ func main() {
 		WriteTimeout: 20 * time.Second,
 	})
 
-	router.SetupRoutes(app, cfg, log)
+	if err := database.ConnectDB(log, cfg); err != nil {
+		panic(err)
+	}
+	log.Info("succesfull connection to the database")
 
-	log.Info("Starting Fiber on", "host", cfg.AppHost.Value)
+	router.SetupRoutes(app, log)
 
 	if err := app.Listen(cfg.AppHost.Value + ":" + cfg.AppPort.Value); err != nil {
 		panic(err)
