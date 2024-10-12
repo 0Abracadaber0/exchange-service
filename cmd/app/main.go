@@ -4,10 +4,12 @@ import (
 	"exchange/internal/config"
 	"exchange/internal/database"
 	"exchange/internal/router"
+	"exchange/internal/service"
 	"log/slog"
 	"os"
 	"time"
 
+	"github.com/go-co-op/gocron"
 	"github.com/gofiber/fiber/v2"
 )
 
@@ -30,6 +32,16 @@ func main() {
 		panic(err)
 	}
 	log.Info("succesfull migrations")
+
+	location, err := time.LoadLocation("UTC")
+	if err != nil {
+		panic(err)
+	}
+	scheduler := gocron.NewScheduler(location)
+	scheduler.Every(1).Day().At("15:18").Do(service.FetchAndStoreData, log, cfg)
+
+	scheduler.StartAsync()
+	log.Debug("scheduler started")
 
 	router.SetupRoutes(app, log)
 

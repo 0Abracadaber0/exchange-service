@@ -5,6 +5,11 @@ go 1.23.0
 require github.com/gofiber/fiber/v2 v2.52.5
 
 require (
+	github.com/go-co-op/gocron v1.37.0 // indirect
+	github.com/robfig/cron/v3 v3.0.1 // indirect
+)
+
+require (
 	filippo.io/edwards25519 v1.1.0 // indirect
 	github.com/go-sql-driver/mysql v1.8.1
 )
