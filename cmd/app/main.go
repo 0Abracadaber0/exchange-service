@@ -13,6 +13,12 @@ import (
 	"github.com/gofiber/fiber/v2"
 )
 
+// @title Exchange API
+// @version 1.0
+// @description This is a sample exchange API.
+// @host localhost:8080
+// @BasePath /
+
 func main() {
 	cfg := config.MustLoad()
 
@@ -39,7 +45,7 @@ func main() {
 	}
 
 	scheduler := gocron.NewScheduler(location)
-	scheduler.Every(1).Day().At("15:48").Do(service.FetchAndStoreData, log, cfg)
+	scheduler.Every(1).Day().At("16:30").Do(service.FetchAndStoreData, log, cfg)
 
 	scheduler.StartAsync()
 	log.Debug("scheduler started")

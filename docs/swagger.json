@@ -1,0 +1,114 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a sample exchange API.",
+        "title": "Exchange API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "basePath": "/",
+    "paths": {
+        "/rates": {
+            "get": {
+                "description": "Get a list of all currency exchange rates.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rates"
+                ],
+                "summary": "Get all currency rates",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ExchangeRate"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        },
+        "/rates/{date}": {
+            "get": {
+                "description": "Get currency exchange rates for a specific date in YYYY-MM-DD format.",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "rates"
+                ],
+                "summary": "Get currency rates by date",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Date in YYYY-MM-DD format",
+                        "name": "date",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ExchangeRate"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": true
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "models.ExchangeRate": {
+            "type": "object",
+            "properties": {
+                "Cur_Abbreviation": {
+                    "type": "string"
+                },
+                "Cur_ID": {
+                    "type": "integer"
+                },
+                "Cur_Name": {
+                    "type": "string"
+                },
+                "Cur_OfficialRate": {
+                    "type": "number"
+                },
+                "Cur_Scale": {
+                    "type": "integer"
+                },
+                "Date": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
