@@ -13,7 +13,8 @@ var DB *sql.DB
 
 func ConnectDB(log *slog.Logger, cfg *config.Config) error {
 	connStr := getConnectionString(cfg)
-	log.Info("Connecting with connection string:", "connStr", connStr)
+	log.Info("connecting with connection string:")
+	log.Debug("connection string:", slog.String("connStr", connStr))
 
 	var err error
 	DB, err = sql.Open("mysql", connStr)
@@ -30,7 +31,7 @@ func ConnectDB(log *slog.Logger, cfg *config.Config) error {
 }
 
 func getConnectionString(cfg *config.Config) string {
-	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s",
+	connStr := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?parseTime=true",
 		cfg.DbUser.Value,
 		cfg.DbPass.Value,
 		cfg.DbHost.Value,

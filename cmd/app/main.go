@@ -26,6 +26,10 @@ func main() {
 		panic(err)
 	}
 	log.Info("succesfull connection to the database")
+	if err := database.RunMigrations(log, cfg); err != nil {
+		panic(err)
+	}
+	log.Info("succesfull migrations")
 
 	router.SetupRoutes(app, log)
 
