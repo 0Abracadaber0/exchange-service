@@ -45,7 +45,7 @@ func main() {
 	}
 
 	scheduler := gocron.NewScheduler(location)
-	scheduler.Every(1).Day().At("16:30").Do(service.FetchAndStoreData, log, cfg)
+	scheduler.Every(1).Day().At("00:00").Do(service.FetchAndStoreData, log, cfg)
 
 	scheduler.StartAsync()
 	log.Debug("scheduler started")
