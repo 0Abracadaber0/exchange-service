@@ -9,6 +9,8 @@ RUN go mod download
 
 COPY . .
 
+RUN go test ./... -v
+
 RUN go build -o ./cmd/app/main ./cmd/app/main.go
 
 FROM alpine
