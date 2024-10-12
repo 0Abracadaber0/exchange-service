@@ -12,8 +12,8 @@ func GetRatesHandler(ctx *fiber.Ctx) error {
 	return handlers.GetRatesHandler(ctx)
 }
 
-func GetRatesInDayHandler(ctx *fiber.Ctx) error {
-	return nil
+func GetRatesByDateHandler(ctx *fiber.Ctx) error {
+	return handlers.GetRatesByDateHandler(ctx)
 }
 
 func SetupRoutes(app *fiber.App, log *slog.Logger) {
@@ -35,5 +35,5 @@ func SetupRoutes(app *fiber.App, log *slog.Logger) {
 	})
 
 	app.Get("/rates", GetRatesHandler)
-	app.Get("/rates/:day", GetRatesInDayHandler)
+	app.Get("/rates/:date", GetRatesByDateHandler)
 }

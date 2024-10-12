@@ -14,3 +14,13 @@ func GetRatesHandler(ctx *fiber.Ctx) error {
 
 	return ctx.JSON(rates)
 }
+
+func GetRatesByDateHandler(ctx *fiber.Ctx) error {
+	date := ctx.Params("date")
+	rates, err := service.GetRatesByDate(date)
+	if err != nil {
+		return ctx.Status(fiber.StatusInternalServerError).SendString(err.Error())
+	}
+
+	return ctx.JSON(rates)
+}
